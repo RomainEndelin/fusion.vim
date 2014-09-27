@@ -1,3 +1,13 @@
+" TODO: Reorder the code
+" TODO: For tpope's vim-projectionist and refactor the code
+" TODO: Leave the "-start-insert" as an option
+" TODO: Files->categories navigation
+" TODO: List files when no category is given (and prefix each file with its
+" category)
+" TODO: Rename everything
+" TODO: Count and display the number of file in each category
+" TODO: Echo error if one of the plugin isn't loaded
+
 autocmd User ProjectionistActivate call s:activate()
 
 function! s:activate() abort
