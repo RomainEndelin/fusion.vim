@@ -1,7 +1,5 @@
 " TODO: Leave the "-start-insert" as an option
 " TODO: Files->categories navigation
-" TODO: List files when no category is given (and prefix each file with its
-" category)
 " TODO: Echo error if one of the plugin isn't loaded
 
 autocmd User ProjectionistActivate call s:activate()
@@ -20,14 +18,29 @@ function! s:activate() abort
                 \ }
 
     function! s:unite_projection_files_source.gather_candidates(args, context)
-        let category = a:context['custom_category']
-        let files = get(projectionist#list_all(), category, "")
-        return map(files,
-                    \ '{
-                    \ "word": v:val[0],
-                    \ "kind": ["file"],
-                    \ "action__path": v:val[1],
-                    \ }')
+        let category = get(a:context, 'custom_category', '')
+        if category ==# ''
+            let files = []
+            for [category, file_list] in items(projectionist#list_all())
+                for [file_name, file_path] in file_list
+                    call add(files, [category, file_name, file_path])
+                endfor
+            endfor
+            return map(files,
+                        \ '{
+                        \ "word": printf("%s: %s", v:val[0], v:val[1]),
+                        \ "kind": ["file"],
+                        \ "action__path": v:val[2],
+                        \ }')
+        else
+            let files = get(projectionist#list_all(), category, "")
+            return map(files,
+                        \ '{
+                        \ "word": v:val[0],
+                        \ "kind": ["file"],
+                        \ "action__path": v:val[1],
+                        \ }')
+        endif
     endfunction
 
     function! s:get_projection_files(type)
