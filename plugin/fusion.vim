@@ -2,7 +2,6 @@
 " TODO: Files->categories navigation
 " TODO: List files when no category is given (and prefix each file with its
 " category)
-" TODO: Count and display the number of file in each category
 " TODO: Echo error if one of the plugin isn't loaded
 
 autocmd User ProjectionistActivate call s:activate()
@@ -36,11 +35,11 @@ function! s:activate() abort
     endfunction
 
     function! s:unite_projection_categories_source.gather_candidates(args, context)
-        return map(keys(projectionist#navigation_commands()),
+        return map(items(projectionist#list_all()),
                     \ '{
-                    \ "word": v:val,
+                    \ "word": printf("%s (%d)", v:val[0], len(v:val[1])),
                     \ "kind": ["command"],
-                    \ "action__command": s:get_projection_files(v:val),
+                    \ "action__command": s:get_projection_files(v:val[0]),
                     \ "action__type": ": "
                     \ }')
     endfunction
