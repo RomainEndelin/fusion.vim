@@ -1,6 +1,7 @@
-" TODO: Leave the "-start-insert" as an option
 " TODO: Files->categories navigation
 " TODO: Echo error if one of the plugin isn't loaded
+
+let g:fusion_files_start_insert = 0
 
 autocmd User ProjectionistActivate call s:activate()
 
@@ -44,7 +45,11 @@ function! s:activate() abort
     endfunction
 
     function! s:get_projection_files(type)
-        return printf("Unite projection-files -custom-category=%s", a:type)
+        let command_str = printf("Unite projection-files -custom-category=%s", a:type)
+        if g:fusion_files_start_insert
+            let command_str .= " -start-insert"
+        endif
+        return command_str
     endfunction
 
     function! s:unite_projection_categories_source.gather_candidates(args, context)
@@ -60,5 +65,5 @@ function! s:activate() abort
     call unite#define_source(s:unite_projection_files_source)
     call unite#define_source(s:unite_projection_categories_source)
 
-    nnoremap <C-f> :Unite projection-categories -start-insert<cr>
+    nnoremap <C-f> :Unite projection-categories<cr>
 endfunction
