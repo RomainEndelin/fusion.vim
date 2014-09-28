@@ -21,7 +21,7 @@ function! s:activate() abort
         if category ==# ''
             for [category, file_list] in items(projectionist#list_all())
                 for [file_name, file_path] in file_list
-                    call add(files, [printf("%s: %s", category, file_name), file_path])
+                    call add(files, [printf("%s:\t%s", category, file_name), file_path])
                 endfor
             endfor
         else
@@ -47,7 +47,7 @@ function! s:activate() abort
     function! s:unite_projection_categories_source.gather_candidates(args, context)
         return map(items(projectionist#list_all()),
                     \ '{
-                    \ "word": printf("%s (%d)", v:val[0], len(v:val[1])),
+                    \ "word": printf("%s\t(%d)", v:val[0], len(v:val[1])),
                     \ "kind": ["command"],
                     \ "action__command": s:get_projection_files(v:val[0]),
                     \ "action__type": ": "
