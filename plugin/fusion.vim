@@ -1,6 +1,3 @@
-" TODO: Files->categories navigation
-" TODO: Echo error if one of the plugin isn't loaded
-
 let g:fusion_files_start_insert = 0
 
 autocmd User ProjectionistActivate call s:activate()
