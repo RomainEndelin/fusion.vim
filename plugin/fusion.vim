@@ -64,6 +64,4 @@ function! s:activate() abort
 
     call unite#define_source(s:unite_projection_files_source)
     call unite#define_source(s:unite_projection_categories_source)
-
-    nnoremap <C-f> :Unite projection-categories<cr>
 endfunction
