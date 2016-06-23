@@ -1,3 +1,7 @@
+*Important: This project is now deprecated. It turns out, while I was using the plugin, I didn't really like the experience. Today I am not even using Unite anymore, although I still appreciate the concept.*
+
+*Still, if you think this plugin is a good idea, and you would like some advices on forking it, please contact me.*
+
 # Fusion.vim
 
 [Fusion.vim][7] is a Project-Navigation plugin for vim. It stands on top of two genius projects, from two of the greatest Vim Masters: Tim Pope's [Vim-Projectionist][1] and Shougo's [Unite][2].
